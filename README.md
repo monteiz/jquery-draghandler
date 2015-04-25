@@ -4,6 +4,9 @@ A simple high-performance jQuery plugin that helps you dealing with ```dragenter
 <h3>Usage</h3>
 
 ```javascript
+
+<script type="text/javascript" src="jquery.draghandler.min.js"></script>
+
 $(selector).draghandler({
 	onDragEnter: function() {
 		// $(this).doSomething();
