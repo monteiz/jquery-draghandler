@@ -1,5 +1,5 @@
 # jquery-draghandler
-A simple high-performance jQuery plugin that helps you dealing with dragenter and dragleave events.
+A simple high-performance jQuery plugin that helps you dealing with ```dragenter``` and ```dragleave``` events.
 
 <h3>Usage</h3>
 
