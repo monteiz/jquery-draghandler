@@ -19,7 +19,7 @@ The ```dragleave``` event of an element is fired when hovering a child element o
 
 Consider the following DOM structure:
 
-[IMAGE]
+![DOM structure](/docs/img/dom-structure.png?raw=true "DOM structure")
 
 You want to handle the ```dragenter``` and the ```dragleave``` events for the element <b>B</b> (child of <b>A</b>).
 
@@ -54,7 +54,7 @@ That is: tells the browser to prevent <b>C</b> to fire any event. The drawback i
 
 Consider again the following DOM structure:
 
-[IMAGE]
+![DOM structure](/docs/img/dom-structure.png?raw=true "DOM structure")
 
 When dragging into the element <b>B</b>, jquery-draghandler intercepts the ```dragenter``` event for <b>B</b>. So far so good. The difference is when dragging out the element <b>B</b>. Here, jquery-draghandler does not intercept the ```dragleave``` for the element <b>B</b>, but rather the ```dragenter``` for the element <b>A</b>, calling the ```onDragLeave``` callback.
 
