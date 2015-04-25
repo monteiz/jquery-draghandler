@@ -44,8 +44,6 @@
 
 		}
 
-		console.log(elementToHandle);
-
 		return this.each(function(index, element) {
 
 			$(this).parent().on("dragenter", function(event) {
