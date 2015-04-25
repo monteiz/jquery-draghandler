@@ -7,13 +7,17 @@ A simple high-performance jQuery plugin that helps you dealing with ```dragenter
 
 <script type="text/javascript" src="jquery.draghandler.min.js"></script>
 
-$(selector).draghandler({
-	onDragEnter: function() {
-		// $(this).doSomething();
-	},
-	onDragLeave: function() {
-		// $(this).doSomethingElse();
-	}
+$(document).ready(function() {
+
+	$(selector).draghandler({
+		onDragEnter: function() {
+			// $(this).doSomething();
+		},
+		onDragLeave: function() {
+			// $(this).doSomethingElse();
+		}
+	});
+
 });
 ```
 
