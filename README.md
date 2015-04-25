@@ -56,9 +56,9 @@ Consider again the following DOM structure:
 
 ![DOM structure](/docs/img/dom-structure.png?raw=true "DOM structure")
 
-When dragging into the element <b>B</b>, jquery-draghandler intercepts the ```dragenter``` event for <b>B</b>. So far so good. The difference is when dragging out the element <b>B</b>. Here, jquery-draghandler does not intercept the ```dragleave``` for the element <b>B</b>, but rather the ```dragenter``` for the element <b>A</b>, calling the ```onDragLeave``` callback.
+When dragging into the element <b>B</b>, jquery-draghandler intercepts the ```dragenter``` event for <b>B</b>. So far so good. The difference is that jquery-draghandler does not intercept the ```dragleave``` for <b>B</b>, when dragging out the element <b>B</b>. Instead, it intercepts the ```dragenter``` for the element <b>A</b>, calling the ```onDragLeave``` callback.
 
-Hence, jquery-draghandler does not effect execution performances because it does not manipulate the DOM in any way. It just faces the problem with a different logic.
+You can see that jquery-draghandler does not effect execution performances because it does not manipulate the DOM in any way. It just faces the problem with a different logic.
 
 
 
