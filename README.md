@@ -49,7 +49,7 @@ Soon you realize that when hovering the element <b>C</b>, the ```dragleave``` ev
 Until now, one possible solution to this problem was the following CSS workaround:
 
 ```css
-C * {
+C {
   pointer-events: none;
 }
 ```
