@@ -43,7 +43,7 @@
 			}
 
 		}
-
+		
 		return this.each(function(index, element) {
 
 			$(this).parent().on("dragenter", function(event) {
@@ -55,6 +55,16 @@
 
 			$(this).on("dragenter", function(event) {
 
+				onDragLeaveHandler();
+				
+				$(document).one("keydown dragenter", function() {
+					onDragLeaveHandler();
+				});
+				
+				$(this).one("mousemove", function() {
+					onDragLeaveHandler();
+				});
+				
 				onDragEnterHandler($(this));
 				event.stopPropagation();
 
