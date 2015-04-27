@@ -56,6 +56,10 @@
 			$(this).on("dragenter", function(event) {
 
 				onDragLeaveHandler();
+			
+				$(document).one("keydown dragenter", function() {
+					onDragLeaveHandler();
+				});
 				
 				$("body").one("keydown dragenter", function() {
 					onDragLeaveHandler();
