@@ -21,7 +21,7 @@
 		var elementToHandle = this;
 
 		function onDragLeaveHandler() {
-
+            
 			if (overElement != null) {
 
 				callbacks.onDragLeave.call(elementToHandle);
@@ -34,8 +34,11 @@
 
 		function onDragEnterHandler(element) {
 
-			if (overElement == null || overElement != element) {
-				callbacks.onDragLeave.call(element);
+            if (overElement != null)
+               callbacks.onDragLeave.call(element);
+            
+			if (overElement == null) {
+
 				overElement = element;
 
 				callbacks.onDragEnter.call(element);
@@ -43,28 +46,21 @@
 			}
 
 		}
-		
+        		
 		return this.each(function(index, element) {
-
-			$(this).parent().on("dragenter", function(event) {
-
-				onDragLeaveHandler();
-				event.stopPropagation();
-
-			});
 
 			$(this).on("dragenter", function(event) {
 
+                if (overElement != null && overElement[0] == $(this)[0]) {
+                    return false;
+                }
+                
 				onDragLeaveHandler();
 			
 				$(document).one("keydown dragenter", function() {
 					onDragLeaveHandler();
 				});
-				
-				$("body").one("keydown dragenter", function() {
-					onDragLeaveHandler();
-				});
-				
+								
 				$(this).one("mousemove", function() {
 					onDragLeaveHandler();
 				});
