@@ -13,67 +13,69 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function($) {
+(function ($) {
 
-	$.fn.draghandler = function(callbacks) {
+    $.fn.draghandler = function (callbacks) {
 
-		var overElement = null;
-		var elementToHandle = this;
+        var overElement = null;
+        var elementToHandle = this;
 
-		function onDragLeaveHandler() {
-            
-			if (overElement != null) {
+        function onDragLeaveHandler() {
 
-				callbacks.onDragLeave.call(elementToHandle);
+            if (overElement != null) {
 
-				overElement = null;
+                callbacks.onDragLeave.call(elementToHandle);
 
-			}
+                overElement = null;
 
-		}
+            }
 
-		function onDragEnterHandler(element) {
+        }
 
-            if (overElement != null)
-               callbacks.onDragLeave.call(element);
-            
-			if (overElement == null) {
+        function onDragEnterHandler(element) {
 
-				overElement = element;
+            if (overElement != null) callbacks.onDragLeave.call(element);
 
-				callbacks.onDragEnter.call(element);
+            if (overElement == null) {
 
-			}
+                overElement = element;
 
-		}
-        		
-		return this.each(function(index, element) {
+                callbacks.onDragEnter.call(element);
 
-			$(this).on("dragenter", function(event) {
+            }
+
+        }
+
+        return this.each(function (index, element) {
+
+            $(this).on("dragenter", function (event) {
 
                 if (overElement != null && overElement[0] == $(this)[0]) {
                     return false;
                 }
-                
-				onDragLeaveHandler();
-			
-				$(document).one("keydown dragenter", function() {
-					onDragLeaveHandler();
-				});
-								
-				$(this).one("mousemove", function() {
-					onDragLeaveHandler();
-				});
-				
-				onDragEnterHandler($(this));
-				event.stopPropagation();
 
-			});
+                onDragLeaveHandler();
 
-		});
+                $(this).parent().on("keydown dragenter", function () {
+                    onDragLeaveHandler();
+                });
+                $(document).one("keydown dragenter", function () {
+                    onDragLeaveHandler();
+                });
 
-		return this;
+                $(this).one("mousemove", function () {
+                    onDragLeaveHandler();
+                });
 
-	};
+                onDragEnterHandler($(this));
+                event.stopPropagation();
+
+            });
+
+        });
+
+        return this;
+
+    };
 
 }(jQuery));
