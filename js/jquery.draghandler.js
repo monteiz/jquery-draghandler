@@ -16,66 +16,44 @@
 (function ($) {
 
     $.fn.draghandler = function (callbacks) {
-
         var overElement = null;
-        var elementToHandle = this;
+        var elementToHandle = this.get(0);
 
         function onDragLeaveHandler() {
-
-            if (overElement != null) {
-
+            if (overElement !== null) {
                 callbacks.onDragLeave.call(elementToHandle);
-
                 overElement = null;
-
             }
-
         }
 
         function onDragEnterHandler(element) {
-
-            if (overElement != null) callbacks.onDragLeave.call(element);
-
-            if (overElement == null) {
-
-                overElement = element;
-
-                callbacks.onDragEnter.call(element);
-
+            if (overElement !== null) {
+              callbacks.onDragLeave.call(element);
+            } else {
+              overElement = element;
+              callbacks.onDragEnter.call(element);
             }
-
         }
 
         return this.each(function (index, element) {
+            var $this = $(this);
 
-            $(this).on("dragenter", function (event) {
-
-                if (overElement != null && overElement[0] == $(this)[0]) {
+            $this.on('dragenter', function (event) {
+                if (overElement !== null && overElement === this) {
                     return false;
                 }
 
                 onDragLeaveHandler();
-
-                $(this).parent().on("keydown dragenter", function () {
-                    onDragLeaveHandler();
-                });
-                $(document).one("keydown dragenter", function () {
-                    onDragLeaveHandler();
-                });
-
-                $(this).one("mousemove", function () {
-                    onDragLeaveHandler();
-                });
-
-                onDragEnterHandler($(this));
+                onDragEnterHandler(this);
                 event.stopPropagation();
 
-            });
+                $this.parent().on('keydown dragenter', onDragLeaveHandler);
+                $(document).one('keydown dragenter', onDragLeaveHandler);
+                $this.one('mousemove', onDragLeaveHandler);
 
+            });
         });
 
         return this;
-
     };
-
 }(jQuery));
